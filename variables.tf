@@ -34,12 +34,12 @@ variable "manifest_bucket_name" {
   description = "Your S3 bucket name to store manifests of ingests processed in"
 }
 variable "manifest_prefix" {
-  default = "manifests/"
+  default = "manifests"
   type        = string
   description = "A file prefix that will be used for manifest logs on success"
 }
 variable "failed_manifest_prefix" {
-  default = "failed/"
+  default = "failed"
   type        = string
   description = "A file prefix that will be used for manifest logs on failure"
 }
@@ -60,8 +60,5 @@ variable "controlshift_hostname" {
   description = "The hostname of your ControlShift instance. Likely to be something like action.myorganization.org"
 }
 
-variable "receiver_timeout" {
-  default = 60
-  type        = number
-  description = "The timeout for the receiving Lambda, in seconds"
+variable "controlshift_environment" {
 }
