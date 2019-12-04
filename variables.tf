@@ -54,6 +54,12 @@ variable "failure_topic_name" {
   description = "An SNS topic name that will be notified about batch processing failures"
 }
 
+variable "receiver_timeout" {
+  default = 60
+  type        = number
+  description = "The timeout for the receiving Lambda, in seconds"
+}
+
 variable "controlshift_hostname" {
   default = "staging.controlshiftlabs.com"
   type        = string
@@ -61,4 +67,7 @@ variable "controlshift_hostname" {
 }
 
 variable "controlshift_environment" {
+  default = "production"
+  type        = string
+  description = "The environment of your ControlShift instance. Either staging or production"
 }

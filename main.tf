@@ -1,14 +1,21 @@
 module "terraform-aws-controlshift-redshift-sync" {
   source = "controlshift/controlshift-redshift-sync/aws"
+  /*source = "../terraform-aws-controlshift-redshift-sync"*/
+  /*source = "github.com/MoveOnOrg/terraform-aws-controlshift-redshift-sync"*/
   redshift_username = var.redshift_username
   redshift_password = var.redshift_password
   receiver_bucket_name = var.receiver_bucket_name
   manifest_bucket_name = var.manifest_bucket_name
   manifest_prefix = var.manifest_prefix
   failed_manifest_prefix = var.failed_manifest_prefix
+  success_topic_name = var.success_topic_name
+  failure_topic_name = var.failure_topic_name
   aws_region = var.aws_region
   redshift_database_name = aws_redshift_cluster.default.database_name
   redshift_dns_name = aws_redshift_cluster.default.dns_name
   redshift_port = aws_redshift_cluster.default.port
+  redshift_schema = var.redshift_schema
+  receiver_timeout = var.receiver_timeout
+  controlshift_hostname = var.controlshift_hostname
   controlshift_environment = var.controlshift_environment
 }

@@ -1,3 +1,4 @@
+/*
 resource "aws_redshift_cluster" "default" {
   cluster_identifier = "redshift-cluster"
   database_name      = "agra_replica"
@@ -25,6 +26,7 @@ data "aws_iam_policy_document" "redshift_assume_role" {
     }
   }
 }
+
 
 resource "aws_iam_role_policy" "redshift_loads_s3" {
   name = "AllowsRedshiftS3Access"
@@ -64,3 +66,4 @@ resource "aws_security_group" "allow_access_to_redshift_from_vpn" {
     cidr_blocks     = ["0.0.0.0/0"]
   }
 }
+*/
