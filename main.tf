@@ -1,5 +1,5 @@
 module "terraform-aws-controlshift-redshift-sync" {
-  source = "controlshift/controlshift-redshift-sync/aws"
+  source = "git@github.com:MoveOnOrg/terraform-aws-controlshift-redshift-sync.git"
   redshift_username = var.redshift_username
   redshift_password = var.redshift_password
   receiver_bucket_name = var.receiver_bucket_name
