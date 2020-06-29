@@ -20,6 +20,7 @@ uri = URI('https://demo.controlshiftlabs.com/api/bulk_data/schema.json')
 json = Net::HTTP.get(uri)
 tables = JSON.parse(json)['tables']
 
+puts "SET search_path = 'controlshiftdb';"
 tables.each do |table|
   name = table['table']['name']
   columns = table['table']['columns']
