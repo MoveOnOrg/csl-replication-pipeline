@@ -84,9 +84,28 @@ aws-vault exec bulk-data -- terraform init
 aws-vault exec bulk-data -- terraform apply
 ```
 
+#### Issues
+Make sure you create the S3 bucket to *store* the Terraform config, but do not manually create the other buckets.
+Terraform will try to make IAM roles named `ReceiverLambdaRole` and `APIGatewayRole` - which already exist if you're trying to set up two syncs.
+It will also try to create an already existing KMS alias `LambaRedshiftLoaderKey`.
+
+`success_topic_name` and `failure_topic_name` need to be distinct per region as well.  Set them to appropriate values.
+
+The `AllowsLoaderExecution` policy for `LoaderLambdaRole` needs to be name_prefix not name.
+
+You can import the existing resources:
+```terraform import module.terraform-aws-controlshift-redshift-sync.aws_iam_role.receiver_lambda_role 'ReceiverLambdaRole'
+terraform import module.terraform-aws-controlshift-redshift-sync.aws_iam_role.api_gateway_role 'APIGatewayRole'
+terraform import module.terraform-aws-controlshift-redshift-sync.aws_kms_alias.lambda_alias 'alias/LambaRedshiftLoaderKey'
+```
+If Terraform claims to be already managing the resource, remove the old resource from the config first, then try again:
+`terraform state rm module.terraform-aws-controlshift-redshift-sync.aws_iam_role.receiver_lambda_role`
+
 The output of the terraform plan is a Webhook URL. You'll need to configure this in your instance of the ControlShift platform via Settings > Integrations > Webhooks.
 
 Once the webhook is configured it should populate the tables within your Redshift instance nightly. Alternatively, you can use the "Test Ingest" feature to trigger a full-table refresh on demand from the ControlShift web UI.
+
+In order to use AWS Glue, you'll need to set `redshift_security_group_id` to the id of a security group set to allow all inbound TCP connections.  Assuming your system is sane, you won't have one of those already, so create one and set the variable.  You'll also need to create a [VPC Gateway endpoint](https://docs.aws.amazon.com/vpc/latest/userguide/vpce-gateway.html) for S3; Terraform won't make one for you.
 
 ### Logs and Debugging
 

@@ -1,18 +1,22 @@
 module "terraform-aws-controlshift-redshift-sync" {
   source = "controlshift/controlshift-redshift-sync/aws"
+  version = "0.2.1"
   redshift_username = var.redshift_username
   redshift_password = var.redshift_password
-  receiver_bucket_name = var.receiver_bucket_name
   manifest_bucket_name = var.manifest_bucket_name
+  glue_scripts_bucket_name = var.glue_scripts_bucket_name
+  redshift_cluster_identifier = var.redshift_cluster_identifier
+  controlshift_organization_slug = var.controlshift_organization_slug
   manifest_prefix = var.manifest_prefix
   failed_manifest_prefix = var.failed_manifest_prefix
   success_topic_name = var.success_topic_name
   failure_topic_name = var.failure_topic_name
   aws_region = var.aws_region
   redshift_database_name = var.redshift_database_name
-  redshift_dns_name = var.redshift_dns_name
-  redshift_port = var.redshift_port
   redshift_schema = var.redshift_schema
   controlshift_hostname = var.controlshift_hostname
   receiver_timeout = var.receiver_timeout
+  lambda_loader_subnet_ids = var.lambda_loader_subnet_ids
+  lambda_loader_security_group_ids = var.lambda_loader_security_group_ids
+  glue_physical_connection_requirements = var.glue_physical_connection_requirements
 }

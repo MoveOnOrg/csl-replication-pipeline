@@ -65,3 +65,36 @@ variable "receiver_timeout" {
   type        = number
   description = "The timeout for the receiving Lambda, in seconds"
 }
+
+variable "redshift_cluster_identifier" {
+  type = string
+  description = "The target Redshift cluster ID"
+}
+
+variable "controlshift_organization_slug" {
+  type = string
+  description = "The organization's slug in ControlShift platform. Ask support team (support@controlshiftlabs.com) to find this value."
+}
+
+variable "glue_scripts_bucket_name" {
+  type        = string
+  description = "Your S3 bucket name to store Glue scripts in"
+}
+
+variable "lambda_loader_subnet_ids" {
+  type = list(string)
+  description = "List of subnet IDs where AWS Lambda may be run. Add more than one for Multi AZ reliability"
+  default = []
+}
+
+variable "lambda_loader_security_group_ids" {
+  type = list(string)
+  description = "List of AWS security groups IDs that should be assigned to the lambda that loads tables into Redshift"
+  default = []
+}
+
+variable "glue_physical_connection_requirements" {
+  type = object({ availability_zone=string, subnet_id=string, security_group_id_list=list(string) })
+  description = "A terraform map of the physical_connection_requirements property of the glue redshift connection. See Terraform aws_glue_connection docs."
+  default = null
+}
