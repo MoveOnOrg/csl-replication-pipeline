@@ -33,7 +33,7 @@ For the ingest process to work correctly, tables that match the output of the Co
 
 First generate the DDL statements, and then apply them manually in your Redshift environment.
 ```
-create_tables.rb > tables.sql
+./create_tables.rb > tables.sql
 ```
 
 ### Terraform Variables
