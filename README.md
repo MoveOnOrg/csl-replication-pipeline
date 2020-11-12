@@ -33,7 +33,7 @@ For the ingest process to work correctly, tables that match the output of the Co
 
 First generate the DDL statements, and then apply them manually in your Redshift environment.
 ```
-./create_tables.rb > tables.sql
+create_table.rb > tables.sql
 ```
 
 ### Terraform Variables
@@ -84,7 +84,8 @@ aws-vault exec bulk-data -- terraform init
 aws-vault exec bulk-data -- terraform apply
 ```
 
-#### Issues
+#### Issues with multiple regions
+Terraform sync was not designed to be operated in multiple regions at once, but you should be able to get it working by following the following steps.
 Make sure you create the S3 bucket to *store* the Terraform config, but do not manually create the other buckets.
 Terraform will try to make IAM roles named `ReceiverLambdaRole` and `APIGatewayRole` - which already exist if you're trying to set up two syncs.
 It will also try to create an already existing KMS alias `LambaRedshiftLoaderKey`.
@@ -101,6 +102,7 @@ terraform import module.terraform-aws-controlshift-redshift-sync.aws_kms_alias.l
 If Terraform claims to be already managing the resource, remove the old resource from the config first, then try again:
 `terraform state rm module.terraform-aws-controlshift-redshift-sync.aws_iam_role.receiver_lambda_role`
 
+#### Finishing setup
 The output of the terraform plan is a Webhook URL. You'll need to configure this in your instance of the ControlShift platform via Settings > Integrations > Webhooks.
 
 Once the webhook is configured it should populate the tables within your Redshift instance nightly. Alternatively, you can use the "Test Ingest" feature to trigger a full-table refresh on demand from the ControlShift web UI.
