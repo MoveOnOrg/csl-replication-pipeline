@@ -1,6 +1,5 @@
 module "terraform-aws-controlshift-redshift-sync" {
-  source = "controlshift/controlshift-redshift-sync/aws"
-  version = "0.2.1"
+  source = "git@github.com:MoveOnOrg/terraform-aws-controlshift-redshift-sync.git"
   redshift_username = var.redshift_username
   redshift_password = var.redshift_password
   manifest_bucket_name = var.manifest_bucket_name
@@ -19,4 +18,6 @@ module "terraform-aws-controlshift-redshift-sync" {
   lambda_loader_subnet_ids = var.lambda_loader_subnet_ids
   lambda_loader_security_group_ids = var.lambda_loader_security_group_ids
   glue_physical_connection_requirements = var.glue_physical_connection_requirements
+  email_open_firehose_stream = var.email_open_firehose_stream
+  email_click_firehose_stream = var.email_click_firehose_stream
 }

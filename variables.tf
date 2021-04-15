@@ -98,3 +98,15 @@ variable "glue_physical_connection_requirements" {
   description = "A terraform map of the physical_connection_requirements property of the glue redshift connection. See Terraform aws_glue_connection docs."
   default = null
 }
+
+variable "email_open_firehose_stream" {
+  type        = string
+  description = "The name of a Firehose stream that will receive email open events."
+  default = ""
+}
+
+variable "email_click_firehose_stream" {
+  type        = string
+  description = "The name of a Firehose stream that will receive email click events."
+  default = ""
+}
