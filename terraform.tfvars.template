@@ -1,7 +1,6 @@
 aws_region = ""
 redshift_username = ""
 redshift_password = ""
-receiver_bucket_name = ""
 manifest_bucket_name = ""
 manifest_prefix = ""
 failed_manifest_prefix = ""
