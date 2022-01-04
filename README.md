@@ -45,7 +45,6 @@ Name | Description
 aws_region | The AWS Region to use. Should match the location of your Redshift instance
 redshift_username | Redshift Username to use for database loads
 redshift_password | Redshift Password to use for database loads
-receiver_bucket_name | Your S3 bucket name ingest CSVs will be stored in. Terraform will create this bucket for you. Must be globally unique.
 manifest_bucket_name | Your S3 bucket name to store manifests of ingests processed in. Terraform will create this bucket for you. Must be globally unique.
 manifest_prefix | A file prefix that will be used for manifest logs on success
 failed_manifest_prefix | A file prefix that will be used for manifest logs on failure

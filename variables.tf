@@ -25,10 +25,6 @@ variable "redshift_schema" {
   description = "The redshift schema to load tables into"
 }
 
-variable "receiver_bucket_name" {
-  type        = string
-  description = "Your S3 bucket name ingest CSVs will be stored in"
-}
 variable "manifest_bucket_name" {
   type        = string
   description = "Your S3 bucket name to store manifests of ingests processed in"
