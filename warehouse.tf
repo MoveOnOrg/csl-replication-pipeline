@@ -4,8 +4,8 @@ resource "aws_redshift_subnet_group" "all_subnets" {
 }
 
 resource "aws_redshift_cluster" "default" {
-  cluster_identifier = "redshift-cluster"
-  database_name      = "agra_replica"
+  cluster_identifier = var.redshift_cluster_identifier
+  database_name      = var.database_name
   master_username    = var.redshift_username
   master_password    = var.redshift_password
   node_type          = "dc2.large"

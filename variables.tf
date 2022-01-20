@@ -61,6 +61,11 @@ variable "receiver_timeout" {
   description = "The timeout for the receiving Lambda, in seconds"
 }
 
+variable "redshift_database_name" {
+  default = "agra_replica"
+  type  = string
+}
+
 variable "redshift_password" {
   type  = string
 }
@@ -109,6 +114,7 @@ variable "receiver_timeout" {
 }
 
 variable "redshift_cluster_identifier" {
+  default = "redshift-cluster"
   type = string
   description = "The target Redshift cluster ID"
 }
