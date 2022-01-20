@@ -106,3 +106,7 @@ variable "email_click_firehose_stream" {
   description = "The name of a Firehose stream that will receive email click events."
   default = ""
 }
+
+variable "vpc_id" {
+  type        = string
+}

@@ -20,4 +20,5 @@ module "terraform-aws-controlshift-redshift-sync" {
   glue_physical_connection_requirements = var.glue_physical_connection_requirements
   email_open_firehose_stream = var.email_open_firehose_stream
   email_click_firehose_stream = var.email_click_firehose_stream
+  vpc_id=var.vpc_id
 }
