@@ -2,9 +2,12 @@
 **/.terraform/*
 
 # .tfstate files
+.terraform.lock.hcl
 *.tfstate
 *.tfstate.*
 
 # .tfvars files
 *.tfvars
+
+# Other cruft
 .idea/

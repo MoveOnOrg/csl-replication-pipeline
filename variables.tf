@@ -4,40 +4,81 @@ variable "aws_region" {
   description = "The AWS Region to use. All resources will be created in this region."
 }
 
-variable "redshift_database_name" {
-  type = string
-}
-variable "redshift_dns_name" {
-  type = string
-}
-variable "redshift_port" {
-  type = string
-}
-variable "redshift_username" {
+variable "controlshift_environment" {
+  default = "staging"
   type        = string
+  description = "The environment of your ControlShift instance. Either staging or production"
 }
-variable "redshift_password" {
+
+variable "controlshift_hostname" {
+  default = "staging.controlshiftlabs.com"
   type        = string
+  description = "The hostname of your ControlShift instance. Likely to be something like action.myorganization.org"
 }
-variable "redshift_schema" {
-  type  = string
-  default = "public"
-  description = "The redshift schema to load tables into"
+
+variable "controlshift_organization_slug" {
+  type = string
+  description = "The organization's slug in ControlShift platform. Ask support team (support@controlshiftlabs.com) to find this value."
+}
+
+variable "failed_manifest_prefix" {
+  default = "failed"
+  type        = string
+  description = "A file prefix that will be used for manifest logs on failure"
+}
+
+variable "failure_topic_name" {
+  default = "ControlshiftLambdaLoaderFailure"
+  type        = string
+  description = "An SNS topic name that will be notified about batch processing failures"
+}
+
+variable "failure_topic_name_for_run_glue_job_lambda" {
+  default = "ControlshiftGlueJobFailure"
+  type        = string
+  description = "An SNS topic name that will be notified about batch processing failures"
+}
+
+variable "glue_scripts_bucket_name" {
+  type        = string
+  description = "Your S3 bucket name to store Glue scripts in"
 }
 
 variable "manifest_bucket_name" {
   type        = string
   description = "Your S3 bucket name to store manifests of ingests processed in"
 }
+
 variable "manifest_prefix" {
-  default = "manifests/"
+  default = "manifests"
   type        = string
   description = "A file prefix that will be used for manifest logs on success"
 }
-variable "failed_manifest_prefix" {
-  default = "failed/"
+
+variable "receiver_timeout" {
+  default = 60
+  type        = number
+  description = "The timeout for the receiving Lambda, in seconds"
+}
+
+variable "redshift_password" {
+  type  = string
+}
+
+variable "redshift_schema" {
+  type  = string
+  default = "public"
+  description = "The Redshift schema to load tables into"
+}
+
+variable "redshift_username" {
+  type = string
+}
+
+variable "success_topic_name" {
+  default = "ControlshiftLambdaLoaderSuccess"
   type        = string
-  description = "A file prefix that will be used for manifest logs on failure"
+  description = "An SNS topic name that will be notified about batch processing successes"
 }
 variable "success_topic_name" {
   default = "ControlshiftLambdaLoaderSuccess"
@@ -50,10 +91,15 @@ variable "failure_topic_name" {
   description = "An SNS topic name that will be notified about batch processing failures"
 }
 
-variable "controlshift_hostname" {
-  default = "staging.controlshiftlabs.com"
+variable "success_topic_name_for_run_glue_job_lambda" {
+  default = "ControlshiftGlueJobSuccess"
   type        = string
-  description = "The hostname of your ControlShift instance. Likely to be something like action.myorganization.org"
+  description = "An SNS topic name that will be notified about batch processing successes"
+}
+
+variable "redshift_ingress_cidr" {
+  type        = string
+  default = "0.0.0.0/0"
 }
 
 variable "receiver_timeout" {
