@@ -4,21 +4,6 @@ variable "aws_region" {
   description = "The AWS Region to use. All resources will be created in this region."
 }
 
-variable "redshift_database_name" {
-  type = string
-}
-variable "redshift_dns_name" {
-  type = string
-}
-variable "redshift_port" {
-  type = string
-}
-variable "redshift_username" {
-  type        = string
-}
-variable "redshift_password" {
-  type        = string
-}
 variable "redshift_schema" {
   type  = string
   default = "public"
