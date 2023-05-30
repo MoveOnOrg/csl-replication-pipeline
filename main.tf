@@ -1,7 +1,7 @@
 module "terraform-aws-controlshift-redshift-sync" {
   source = "git@github.com:MoveOnOrg/terraform-aws-controlshift-redshift-sync.git"
-  redshift_username = var.redshift_username
-  redshift_password = var.redshift_password
+  redshift_username = jsondecode(data.aws_secretsmanager_secret_version.current.secret_string)["username"]
+  redshift_password = jsondecode(data.aws_secretsmanager_secret_version.current.secret_string)["password"]
   manifest_bucket_name = var.manifest_bucket_name
   glue_scripts_bucket_name = var.glue_scripts_bucket_name
   redshift_cluster_identifier = var.redshift_cluster_identifier
@@ -11,7 +11,7 @@ module "terraform-aws-controlshift-redshift-sync" {
   success_topic_name = var.success_topic_name
   failure_topic_name = var.failure_topic_name
   aws_region = var.aws_region
-  redshift_database_name = var.redshift_database_name
+  redshift_database_name = jsondecode(data.aws_secretsmanager_secret_version.current.secret_string)["dbName"]
   redshift_schema = var.redshift_schema
   controlshift_hostname = var.controlshift_hostname
   receiver_timeout = var.receiver_timeout
